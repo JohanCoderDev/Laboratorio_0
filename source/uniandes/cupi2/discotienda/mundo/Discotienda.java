@@ -31,14 +31,17 @@ public class Discotienda
     // Constantes
     // -----------------------------------------------------------------
 
+    // -----------------------------------------------------------------
+    // Variable utilizado para la excepcion en el metodo2
+    // -----------------------------------------------------------------
+	int discosAgregados = 0;
+	
     /**
      * Nombre del archivo de registro de errores del programa
      */
     private static final String LOG_FILE = "./data/error.log";
 
-    // -----------------------------------------------------------------
-    // Atributos
-    // -----------------------------------------------------------------
+
 
     /**
      * La lista de discos de la discotienda
@@ -536,6 +539,42 @@ public class Discotienda
     	pluma.close();
     }
     
+    /**
+     * Metodo para generar un informe de todos los discos de ROCK y POP donde su valor no supere los 1000 pesos.
+     * @return Retorna un informe con los discos de género ROCK y POP que no superan los 1000 pesos.
+     */
+    
+    public void generarInformeGenerosRockPop() throws FileNotFoundException
+    {
+    	// Crear el archivo con la clase FILE
+    	File archivo2 = new File("./data/discosCostosos.txt");
+    	
+    	// Crear la pluma para escribir el archivo
+    	PrintWriter pluma = new PrintWriter(archivo2);
+    	
+    	for(int x = 0; x < discos.size(); x++)
+    	{
+    		Disco miDisco = (Disco)discos.get(x);
+    		if(miDisco.darGenero().equals("Rock") || miDisco.darGenero().equals("Pop"))
+    		{
+    			if(miDisco.darPrecioDisco() <= 1000.0)
+    			{
+    				// Escribir con la pluma en el archivo
+        			pluma.println("Nombre: " + miDisco.darNombreDisco() +
+      					  "Artista: " + miDisco.darArtista() + 
+      					  "Género: " + miDisco.darGenero());
+    				      discosAgregados = discosAgregados + 1;
+    			}
+    			
+    		}
+    	}
+    	if (archivo2.length() == 0) {
+            archivo2.delete();
+        } 
+    	// Cerrar la pluma
+    	pluma.close();
+    }
+    
     // -----------------------------------------------------------------
     // Puntos de extension
     // ----------------------------------------------------------------- 
@@ -560,7 +599,12 @@ public class Discotienda
      */
     public String metodo2( )
     {
-    	return "respuesta 2";
+    		try {
+        		generarInformeGenerosRockPop();
+        	    return "Reporte generado satisfactoriamente";	
+        	} catch (Exception e) {
+        		return "Error fatal :( " + e.getMessage();
+        	}
     }
 
     /**
