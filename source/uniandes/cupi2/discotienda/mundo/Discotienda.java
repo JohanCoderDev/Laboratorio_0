@@ -101,6 +101,12 @@ public class Discotienda
      * @param nombreDisco el nombre del disco a buscar - nombreDisco != null
      * @return El Disco cuyo nombre es igual al nombre dado. Si no se encontrï¿½ retorna null.
      */
+    
+ // Crear el archivo con la clase FILE
+	File archivo2 = new File("./data/discosCostosos.txt");
+    
+    
+    
     public Disco darDisco( String nombreDisco )
     {
         for( int i = 0; i < discos.size( ); i++ )
@@ -546,8 +552,7 @@ public class Discotienda
     
     public void generarInformeGenerosRockPop() throws FileNotFoundException
     {
-    	// Crear el archivo con la clase FILE
-    	File archivo2 = new File("./data/discosCostosos.txt");
+    	
     	
     	// Crear la pluma para escribir el archivo
     	PrintWriter pluma = new PrintWriter(archivo2);
@@ -557,12 +562,13 @@ public class Discotienda
     		Disco miDisco = (Disco)discos.get(x);
     		if(miDisco.darGenero().equals("Rock") || miDisco.darGenero().equals("Pop"))
     		{
-    			if(miDisco.darPrecioDisco() <= 1000.0)
+    			if(miDisco.darPrecioDisco() <= 10000.0)
     			{
     				// Escribir con la pluma en el archivo
-        			pluma.println("Nombre: " + miDisco.darNombreDisco() +
-      					  "Artista: " + miDisco.darArtista() + 
-      					  "Género: " + miDisco.darGenero());
+        			pluma.println(" Nombre: " + miDisco.darNombreDisco() +
+      					  " | Artista: " + miDisco.darArtista() + 
+      					  " | Género: " + miDisco.darGenero() + 
+      					  " | Precio: " + miDisco.darPrecioDisco());
     				      discosAgregados = discosAgregados + 1;
     			}
     			
@@ -603,11 +609,28 @@ public class Discotienda
     public String metodo2()
     {
     	try {
-        	generarInformeGenerosRockPop();
-            return "Reporte generado satisfactoriamente";	
-    	} catch (Exception e) {
-           	return "Error fatal :( " + e.getMessage();
-       	}	
+			generarInformeGenerosRockPop();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	if(archivo2.length() == 0)
+    	{
+    		return "Discos no encontrados";
+    	}
+    	else{
+    		try {
+    			return "Reporte generado satisfactoriamente";
+        	} catch (Exception e) {
+               	return "Error fatal :( " + e.getMessage();
+           	}	
+    	}
+    	
+    		
+    	
+    		
+    	
+    	
     }
 
     /**
