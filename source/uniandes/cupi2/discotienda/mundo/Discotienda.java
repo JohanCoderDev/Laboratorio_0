@@ -568,11 +568,14 @@ public class Discotienda
     			
     		}
     	}
-    	if (archivo2.length() == 0) {
-            archivo2.delete();
-        } 
+    	
     	// Cerrar la pluma
     	pluma.close();
+    	
+    	if(archivo2.exists() && archivo2.length() == 0)
+    	{
+    		archivo2.delete();
+    	}
     }
     
     // -----------------------------------------------------------------
@@ -597,14 +600,14 @@ public class Discotienda
      * Es el punto de extensi�n 2
      * @return respuesta 2
      */
-    public String metodo2( )
+    public String metodo2()
     {
-    		try {
-        		generarInformeGenerosRockPop();
-        	    return "Reporte generado satisfactoriamente";	
-        	} catch (Exception e) {
-        		return "Error fatal :( " + e.getMessage();
-        	}
+    	try {
+        	generarInformeGenerosRockPop();
+            return "Reporte generado satisfactoriamente";	
+    	} catch (Exception e) {
+           	return "Error fatal :( " + e.getMessage();
+       	}	
     }
 
     /**
