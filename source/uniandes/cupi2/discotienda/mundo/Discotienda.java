@@ -31,17 +31,10 @@ public class Discotienda
     // Constantes
     // -----------------------------------------------------------------
 
-    // -----------------------------------------------------------------
-    // Variable utilizado para la excepcion en el metodo2
-    // -----------------------------------------------------------------
-	int discosAgregados = 0;
-	
     /**
      * Nombre del archivo de registro de errores del programa
      */
     private static final String LOG_FILE = "./data/error.log";
-
-
 
     /**
      * La lista de discos de la discotienda
@@ -96,17 +89,17 @@ public class Discotienda
     // Mï¿½todos
     // -----------------------------------------------------------------
 
-    /**
+   
+    
+ // Crear el archivo txt donde se almacenara las canciones de categoria Pop y Rock con valor no mayor a 1000 pesos.
+	File archivo2 = new File("./data/discosCostosos.txt");
+    
+	
+	 /**
      * Retorna un disco de la discotienda dado su nombre.
      * @param nombreDisco el nombre del disco a buscar - nombreDisco != null
      * @return El Disco cuyo nombre es igual al nombre dado. Si no se encontrï¿½ retorna null.
      */
-    
- // Crear el archivo con la clase FILE
-	File archivo2 = new File("./data/discosCostosos.txt");
-    
-    
-    
     public Disco darDisco( String nombreDisco )
     {
         for( int i = 0; i < discos.size( ); i++ )
@@ -552,8 +545,6 @@ public class Discotienda
     
     public void generarInformeGenerosRockPop() throws FileNotFoundException
     {
-    	
-    	
     	// Crear la pluma para escribir el archivo
     	PrintWriter pluma = new PrintWriter(archivo2);
     	
@@ -562,16 +553,14 @@ public class Discotienda
     		Disco miDisco = (Disco)discos.get(x);
     		if(miDisco.darGenero().equals("Rock") || miDisco.darGenero().equals("Pop"))
     		{
-    			if(miDisco.darPrecioDisco() <= 10000.0)
+    			if(miDisco.darPrecioDisco() <= 1000.0)
     			{
     				// Escribir con la pluma en el archivo
         			pluma.println(" Nombre: " + miDisco.darNombreDisco() +
       					  " | Artista: " + miDisco.darArtista() + 
       					  " | Género: " + miDisco.darGenero() + 
       					  " | Precio: " + miDisco.darPrecioDisco());
-    				      discosAgregados = discosAgregados + 1;
     			}
-    			
     		}
     	}
     	
@@ -625,12 +614,6 @@ public class Discotienda
                	return "Error fatal :( " + e.getMessage();
            	}	
     	}
-    	
-    		
-    	
-    		
-    	
-    	
     }
 
     /**
