@@ -88,12 +88,7 @@ public class Discotienda
     // -----------------------------------------------------------------
     // Mï¿½todos
     // -----------------------------------------------------------------
-
-   
-    
- // Crear el archivo txt donde se almacenara las canciones de categoria Pop y Rock con valor no mayor a 1000 pesos.
-	File archivo2 = new File("./data/discosCostosos.txt");
-    
+ 
 	
 	 /**
      * Retorna un disco de la discotienda dado su nombre.
@@ -538,6 +533,9 @@ public class Discotienda
     	pluma.close();
     }
     
+    	// Crear el archivo txt donde se almacenara las canciones de categoria Pop y Rock con valor no mayor a 1000 pesos.
+ 	File archivo2 = new File("./data/discosCostosos.txt");
+    
     /**
      * Metodo para generar un informe de todos los discos de ROCK y POP donde su valor no supere los 1000 pesos.
      * @return Retorna un informe con los discos de género ROCK y POP que no superan los 1000 pesos.
@@ -556,7 +554,9 @@ public class Discotienda
     			if(miDisco.darPrecioDisco() <= 1000.0)
     			{
     				// Escribir con la pluma en el archivo
-        			pluma.println(" Nombre: " + miDisco.darNombreDisco() +
+    				
+        			pluma.println("==============================" + "\n" +
+        					" Nombre: " + miDisco.darNombreDisco() +
       					  " | Artista: " + miDisco.darArtista() + 
       					  " | Género: " + miDisco.darGenero() + 
       					  " | Precio: " + miDisco.darPrecioDisco());
@@ -567,6 +567,7 @@ public class Discotienda
     	// Cerrar la pluma
     	pluma.close();
     	
+    	//Si el disco existe y esta vacio se elimina
     	if(archivo2.exists() && archivo2.length() == 0)
     	{
     		archivo2.delete();
@@ -598,10 +599,14 @@ public class Discotienda
     public String metodo2()
     {
     	try {
+    		
 			generarInformeGenerosRockPop();
+			
 		} catch (FileNotFoundException e1) {
+			
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			
 		}
     	if(archivo2.length() == 0)
     	{
@@ -609,9 +614,13 @@ public class Discotienda
     	}
     	else{
     		try {
+    			
     			return "Reporte generado satisfactoriamente";
+    			
         	} catch (Exception e) {
+        		
                	return "Error fatal :( " + e.getMessage();
+               	
            	}	
     	}
     }
