@@ -567,6 +567,12 @@ public class Discotienda
     	// Cerrar la pluma
     	pluma.close();
     	
+    	/*
+    	 * Al momento de seleccionar la opcion 2, en caso de no encontrar ningun 
+    	 * disco con las caracteristicas requeridas este se eliminara,
+    	 * para ver el resultado refrescar la carpeta de data.
+    	 */
+    	
     	//Si el disco existe y esta vacio se elimina
     	if(archivo2.exists() && archivo2.length() == 0)
     	{
