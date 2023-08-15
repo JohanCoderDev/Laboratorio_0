@@ -604,9 +604,7 @@ public class Discotienda
      * @throws Exception 
      */
     public String metodo2() throws Exception
-    {
-    	//Si el disco existe y esta vacio se elimina
-    	
+    {	
     	try {
     		generarInformeGenerosRockPop();
 			return "Reporte generado satisfactoriamente";
