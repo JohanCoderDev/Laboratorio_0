@@ -532,19 +532,24 @@ public class Discotienda
     	// Cerrar la pluma
     	pluma.close();
     }
-    
-    	// Crear el archivo txt donde se almacenara las canciones de categoria Pop y Rock con valor no mayor a 1000 pesos.
- 	File archivo2 = new File("./data/discosCostosos.txt");
-    
+   
+ 	
     /**
      * Metodo para generar un informe de todos los discos de ROCK y POP donde su valor no supere los 1000 pesos.
      * @return Retorna un informe con los discos de género ROCK y POP que no superan los 1000 pesos.
+     * @throws Exception 
      */
     
-    public void generarInformeGenerosRockPop() throws FileNotFoundException
+    public void generarInformeGenerosRockPop() throws Exception
     {
+    	// Crear el archivo txt donde se almacenara las canciones de categoria Pop y Rock con valor no mayor a 1000 pesos.
+     	File archivo2 = new File("./data/discosCostosos.txt");
+    	
     	// Crear la pluma para escribir el archivo
     	PrintWriter pluma = new PrintWriter(archivo2);
+    	
+    	// Variable booleana utilizada para saber si se agrego un disco
+    	boolean estado = false;
     	
     	for(int x = 0; x < discos.size(); x++)
     	{
@@ -560,6 +565,7 @@ public class Discotienda
       					  " | Artista: " + miDisco.darArtista() + 
       					  " | Género: " + miDisco.darGenero() + 
       					  " | Precio: " + miDisco.darPrecioDisco());
+        			estado = true;
     			}
     		}
     	}
@@ -567,17 +573,11 @@ public class Discotienda
     	// Cerrar la pluma
     	pluma.close();
     	
-    	/*
-    	 * Al momento de seleccionar la opcion 2, en caso de no encontrar ningun 
-    	 * disco con las caracteristicas requeridas este se eliminara,
-    	 * para ver el resultado refrescar la carpeta de data.
-    	 */
-    	
-    	//Si el disco existe y esta vacio se elimina
-    	if(archivo2.exists() && archivo2.length() == 0)
-    	{
-    		archivo2.delete();
+    	// Excepción utilizada cuando no se agrega ningun disco
+    	if(estado == false){
+    		throw new Exception("No existen discos de genero Rock o Pop que no superen los 1000 pesos");
     	}
+    	
     }
     
     // -----------------------------------------------------------------
@@ -601,35 +601,19 @@ public class Discotienda
     /**
      * Es el punto de extensiï¿½n 2
      * @return respuesta 2
+     * @throws Exception 
      */
-    public String metodo2()
+    public String metodo2() throws Exception
     {
+    	//Si el disco existe y esta vacio se elimina
+    	
     	try {
-    		
-			generarInformeGenerosRockPop();
-			
-		} catch (FileNotFoundException e1) {
-			
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			
-		}
-    	if(archivo2.length() == 0)
-    	{
-    		return "Discos no encontrados";
-    	}
-    	else{
-    		try {
-    			
-    			return "Reporte generado satisfactoriamente";
-    			
-        	} catch (Exception e) {
-        		
-               	return "Error fatal :( " + e.getMessage();
-               	
-           	}	
-    	}
-    }
+    		generarInformeGenerosRockPop();
+			return "Reporte generado satisfactoriamente";
+		} catch (Exception e) {
+			return e.getMessage();
+		} 
+    }	
 
     /**
      * Es el punto de extensiï¿½n 3

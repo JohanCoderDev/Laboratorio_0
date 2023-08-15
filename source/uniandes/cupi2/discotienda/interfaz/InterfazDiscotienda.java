@@ -315,8 +315,9 @@ public class InterfazDiscotienda extends JFrame
 
     /**
      * Ejecuta el punto de extensión 2
+     * @throws Exception 
      */
-    public void reqFuncOpcion2( )
+    public void reqFuncOpcion2( ) throws Exception
     {
         String resultado = discotienda.metodo2( );
         JOptionPane.showMessageDialog( this, resultado, "Respuesta", JOptionPane.INFORMATION_MESSAGE );
